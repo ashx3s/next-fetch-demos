@@ -7,9 +7,14 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchCharacters() {
-      const res = await fetch("https://api.disneyapi.dev/character");
-      const data = await res.json();
-       setCharacters(data.data);
+      try {
+
+        const res = await fetch("https://api.disneyapi.dev/character");
+        const data = await res.json();
+        setCharacters(data.data);
+      } catch(err) { 
+        console.error("Fetch Error: ", err)
+      }
     }
     fetchCharacters();
   }, []);
